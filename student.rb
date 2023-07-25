@@ -3,8 +3,11 @@ require './person'
 class Student < Person
   attr_accessor :classroom
 
-  def initialize(age, classroom, name: 'Unknown', parent_permission: true)
-    super(age, name: name, parent_permission: parent_permission)
+  def initialize(age, classroom, **defaults)
+    defaults[:name] ||= 'Unknown'
+    defaults[:parent_permission] = true if defaults[:parent_permission].nil?
+
+    super(age, **defaults)
     @classroom = classroom
   end
 
@@ -12,3 +15,6 @@ class Student < Person
     '¯\\(ツ)/¯'
   end
 end
+
+stu = Student.new(50, 'maths', name: 'john', parent_permission: true)
+puts stu.name
