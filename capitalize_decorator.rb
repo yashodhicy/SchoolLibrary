@@ -2,10 +2,10 @@ require './decorator'
 
 class CapitalizeDecorator < BaseDecorator
   def correct_name
-    to_upper_case(@nameable.correct_name)
+    to_capitalize(@nameable.correct_name)
   end
 
-  def to_upper_case(name)
-    name.upcase
+  def to_capitalize(name)
+    name.capitalize
   end
 end
