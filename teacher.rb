@@ -15,10 +15,3 @@ class Teacher < Person
     true
   end
 end
-
-
-teacher = Teacher.new(35, 'Mathematics', name: 'Jane Smith', parent_permission: true)
-puts teacher.name
-puts teacher.age
-puts teacher.specialization
-puts teacher.can_use_services?

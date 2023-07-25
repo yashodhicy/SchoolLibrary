@@ -15,6 +15,3 @@ class Student < Person
     '¯\\(ツ)/¯'
   end
 end
-
-stu = Student.new(50, 'maths', name: 'john', parent_permission: true)
-puts stu.name
