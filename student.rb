@@ -9,6 +9,7 @@ class Student < Person
 
     super(age, **defaults)
     @classroom = classroom
+    classroom.add_student(self)
   end
 
   def play_hooky
