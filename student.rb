@@ -7,7 +7,7 @@ class Student < Person
     defaults[:name] ||= 'Unknown'
     defaults[:parent_permission] = true if defaults[:parent_permission].nil?
     super(age, **defaults)
-    self.classroom = classroom
+    @classroom = classroom
   end
 
   def classroom=(classroom)
