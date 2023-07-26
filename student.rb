@@ -9,7 +9,7 @@ class Student < Person
 
     super(age, **defaults)
     @classroom = classroom
-    classroom.add_student(self)
+    classroom.add_student(self) unless classroom.students.include?(self)
   end
 
   def play_hooky
