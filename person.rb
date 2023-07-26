@@ -4,7 +4,6 @@ require './trimmer_decorator'
 require './book'
 require './rental'
 
-
 class Person < Nameable
   attr_reader :parent_permission
   attr_accessor :name, :age, :rentals
