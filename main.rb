@@ -1,10 +1,6 @@
 require './app'
 
-def main
-  app = App.new 
-  @option
-  
-  until @option == 7
+def display_menu
   puts ' '
   puts 'Please select an option by entering a number'
   puts '[1] List all books'
@@ -14,32 +10,33 @@ def main
   puts '[5] Create a rental'
   puts '[6] List all rentals for a given person'
   puts '[7] Exit'
-
-  @option = gets.chomp.to_i
-
-case @option
-  when 1
-    app.list_all_books
-  when 2
-    app.list_all_people
-  when 3
-    app.create_person
-  when 4
-    app.create_book
-  when 5
-    app.create_rental
-  when 6
-    app.list_all_rentals
-  when 7
-    puts 'Exiting'
-  else
-    puts 'Please enter a num between 1 and 7.'
-  end
 end
+
+def handle_option(option, app)
+  option_actions = {
+    1 => -> { app.list_all_books },
+    2 => -> { app.list_all_people },
+    3 => -> { app.create_person },
+    4 => -> { app.create_book },
+    5 => -> { app.create_rental },
+    6 => -> { app.list_all_rentals },
+    7 => -> { puts 'Exiting' },
+    default: -> { puts 'Please enter a number between 1 and 7.' }
+  }
+
+  action = option_actions[option] || option_actions[:default]
+  action.call
+end
+
+def main
+  app = App.new
+  @option = 0
+
+  until @option == 7
+    display_menu
+    @option = gets.chomp.to_i
+    handle_option(@option, app)
+  end
 end
 
 main
-
-
-  
-  
