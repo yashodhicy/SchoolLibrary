@@ -40,6 +40,7 @@ class ListAllPeopleStrategy
 
   def execute
     @lister.list_all_people
+    true
   end
 end
 
@@ -50,6 +51,7 @@ class CreatePersonStrategy
 
   def execute
     @creator.create_person
+    true
   end
 end
 
@@ -60,6 +62,7 @@ class CreateBookStrategy
 
   def execute
     @creator.create_book
+    true
   end
 end
 
@@ -70,6 +73,7 @@ class CreateRentalStrategy
 
   def execute
     @creator.create_rental
+    true
   end
 end
 
@@ -80,6 +84,7 @@ class ListAllRentalsStrategy
 
   def execute
     @lister.list_all_rentals
+    true
   end
 end
 
