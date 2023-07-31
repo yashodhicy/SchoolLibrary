@@ -2,121 +2,57 @@ require './classes/student'
 require './classes/teacher'
 require './classes/rental'
 require './classes/person'
-require './sub_classes/handle_option'
-require './sub_classes/display_menu'
+require './classes/bookLister'
+require './classes/personLister'
+require './classes/personCreator'
+require './classes/bookCreator'
+require './classes/rentalCreator'
+require './classes/rentalLister'
 
 class App
-  attr_reader :books, :people, :rentals
-
   def initialize
     @books = []
     @people = []
     @rentals = []
+    @book_lister = BookLister.new(@books)
+    @person_lister = PersonLister.new(@people)
+    @person_creator = PersonCreator.new(@people)
+    @book_creator = BookCreator.new(@books)
+    @rental_creator = RentalCreator.new(@books, @people, @rentals)
+    @rental_lister = RentalLister.new(@rentals, @people, @books)
   end
 
-  def list_all_books
-    return puts 'There are no books in your library' if @books.empty?
+  def start
+    loop do
+      puts 'What would you like to do?'
+      puts '1 - List all books'
+      puts '2 - List all people'
+      puts '3 - Create a person'
+      puts '4 - Create a book'
+      puts '5 - Create a rental'
+      puts '6 - List all rentals'
+      puts '7 - Quit'
 
-    @books.each { |book| puts "Title: #{book.title}, Author: #{book.author}" }
-  end
-
-  def list_all_people
-    return puts 'No people found.' if @people.empty?
-
-    @people.each { |person| puts "[#{person.class}] Name: #{person.name}, Id: #{person.id}, Age: #{person.age}" }
-  end
-
-  def create_person
-    print 'Do you want to create a student (1) or a teacher (2)? [Input the number]:'
-    input = gets.chomp
-
-    case input
-    when '1'
-      create_student
-    when '2'
-      create_teacher
-    end
-  end
-
-  def create_student
-    print 'Age: '
-    age = gets.chomp.to_i
-    print 'Name: '
-    name = gets.chomp
-    print 'Has parent permission? [Y/N]: '
-    permission = gets.chomp.upcase
-
-    case permission
-    when 'N'
-      student = Student.new(age, 'classroom', name: name, parent_permission: false)
-      @people << student
-    when 'Y'
-      student = Student.new(age, 'classroom', name: name, parent_permission: true)
-      @people << student
-    end
-    puts 'Student created successfully'
-  end
-
-  def create_teacher
-    print 'Enter name of teacher: '
-    name = gets.chomp
-    print 'Enter age: '
-    age = gets.chomp.to_i
-    print 'Enter Specialization: '
-    specialization = gets.chomp
-    teacher = Teacher.new(specialization, age, name: name)
-    @people << teacher
-    puts 'Teacher created successfully'
-  end
-
-  def create_book
-    print 'Title: '
-    title = gets.chomp
-    print 'Enter the Author name: '
-    author = gets.chomp
-    book = Book.new(title, author)
-    @books << book
-    puts 'Book created successfully'
-  end
-
-  def create_rental
-    puts 'Select a book from the following list by number: '
-    @books.each_with_index { |book, index| puts "#{index}) Title: #{book.title}, Author: #{book.author}" }
-    book_id = gets.chomp.to_i
-
-    puts 'Select a person from the following list by number'
-    @people.each_with_index do |person, index|
-      puts "#{index}) [#{person.class}] [#{person.class}] Name: #{person.name}, Id: #{person.id}, Age: #{person.age}"
-    end
-    person_id = gets.chomp.to_i
-
-    print 'Date: '
-    date = gets.chomp
-
-    rental = Rental.new(date, books[book_id], people[person_id])
-    @rentals << rental
-    puts 'created a rental.'
-  end
-
-  def list_all_rentals
-    print 'ID of the person: '
-    id = gets.chomp.to_i
-    puts 'Rentals: '
-    list = []
-    @rentals.each do |rental|
-      list << "Date: #{rental.date}, Book: '#{rental.book.title}' by #{rental.book.author}" if rental.person.id == id
-    end
-    return list.each { |rental| puts rental } unless list.empty?
-
-    puts 'No record found for the selected person'
-  end
-
-  def run_file
-    until @option == 7
-      @option = 0
-      Display.new.display_menu
-      @option = gets.chomp.to_i
-      HandleOption.new.handle_option(@option, self)
+      choice = gets.chomp.downcase
+      case choice
+      when '1'
+        @book_lister.list_all_books
+      when '2'
+        @person_lister.list_all_people
+      when '3'
+        @person_creator.create_person
+      when '4'
+        @book_creator.create_book
+      when '5'
+        @rental_creator.create_rental
+      when '6'
+        @rental_lister.list_all_rentals
+      when '7'
+        break
+      else
+        puts 'Invalid choice'
+      end
+      puts "\n"
     end
   end
 end
