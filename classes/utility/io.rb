@@ -30,6 +30,7 @@ class ListAllBooksStrategy
 
   def execute
     @lister.list_all_books
+    true
   end
 end
 
