@@ -1,13 +1,11 @@
-require './classes/student'
-require './classes/teacher'
-require './classes/rental'
-require './classes/person'
-require './classes/bookLister'
-require './classes/personLister'
-require './classes/personCreator'
-require './classes/bookCreator'
-require './classes/rentalCreator'
-require './classes/rentalLister'
+require_relative 'classes/book_lister'
+require_relative 'classes/person_lister'
+require_relative 'classes/person_creator'
+require_relative 'classes/book_creator'
+require_relative 'classes/rental_creator'
+require_relative 'classes/rental_lister'
+require_relative 'classes/utility/menu'
+require_relative 'classes/utility/io'
 
 class App
   def initialize
@@ -20,38 +18,23 @@ class App
     @book_creator = BookCreator.new(@books)
     @rental_creator = RentalCreator.new(@books, @people, @rentals)
     @rental_lister = RentalLister.new(@rentals, @people, @books)
+    @menu = Menu.new
+    @io = IO.new(
+      book_lister: BookLister.new,
+      person_lister: PersonLister.new,
+      person_creator: PersonCreator.new,
+      book_creator: BookCreator.new,
+      rental_creator: RentalCreator.new,
+      rental_lister: RentalLister.new
+    )
   end
 
   def start
     loop do
-      puts 'What would you like to do?'
-      puts '1 - List all books'
-      puts '2 - List all people'
-      puts '3 - Create a person'
-      puts '4 - Create a book'
-      puts '5 - Create a rental'
-      puts '6 - List all rentals'
-      puts '7 - Quit'
-
+      @menu.print
       choice = gets.chomp.downcase
-      case choice
-      when '1'
-        @book_lister.list_all_books
-      when '2'
-        @person_lister.list_all_people
-      when '3'
-        @person_creator.create_person
-      when '4'
-        @book_creator.create_book
-      when '5'
-        @rental_creator.create_rental
-      when '6'
-        @rental_lister.list_all_rentals
-      when '7'
-        break
-      else
-        puts 'Invalid choice'
-      end
+      break unless @io.handle_choice(choice)
+
       puts "\n"
     end
   end
