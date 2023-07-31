@@ -1,6 +1,9 @@
-require './student'
-require './teacher'
-require './rental'
+require './classes/student'
+require './classes/teacher'
+require './classes/rental'
+require './classes/person'
+require './sub_classes/handle_option'
+require './sub_classes/display_menu'
 
 class App
   attr_reader :books, :people, :rentals
@@ -106,5 +109,14 @@ class App
     return list.each { |rental| puts rental } unless list.empty?
 
     puts 'No record found for the selected person'
+  end
+
+  def run_file
+    until @option == 7
+      @option = 0
+      Display.new.display_menu
+      @option = gets.chomp.to_i
+      HandleOption.new.handle_option(@option, self)
+    end
   end
 end

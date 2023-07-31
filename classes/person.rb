@@ -1,8 +1,8 @@
-require './nameable'
-require './capitalize_decorator'
-require './trimmer_decorator'
-require './book'
-require './rental'
+require './classes/nameable'
+require './decorators/capitalize_decorator'
+require './decorators/trimmer_decorator'
+require './classes/book'
+require './classes/rental'
 
 class Person < Nameable
   attr_reader :parent_permission
