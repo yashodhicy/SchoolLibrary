@@ -42,6 +42,7 @@ class App
       @menu.print
       choice = gets.chomp.downcase
       break unless @io.handle_choice(choice)
+
       puts "\n"
     end
     save_data
@@ -65,5 +66,4 @@ class App
     # updated_data = existing_data + data.map(&:to_h)
     File.write(file_path, JSON.generate(data.map(&:to_h)))
   end
-
 end
