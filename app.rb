@@ -48,7 +48,6 @@ class App
     save_data
   end
 
-
   private
 
   def save_data
