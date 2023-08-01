@@ -6,8 +6,13 @@ require_relative 'classes/rental_creator'
 require_relative 'classes/rental_lister'
 require_relative 'classes/utility/menu'
 require_relative 'classes/utility/io'
+require 'json'
 
 class App
+  BOOKS_FILE = './data/books.json'
+  PEOPLE_FILE = './data/people.json'
+  RENTALS_FILE = './data/rentals.json'
+
   def initialize
     @books = []
     @people = []
@@ -19,7 +24,7 @@ class App
     @rental_creator = RentalCreator.new(@books, @people, @rentals)
     @rental_lister = RentalLister.new(@rentals, @people, @books)
     @menu = Menu.new
-    @io = @io = IO.new(
+    @io = IO.new(
       book_lister: BookLister.new(@books),
       person_lister: PersonLister.new(@people),
       person_creator: PersonCreator.new(@people),
@@ -37,5 +42,28 @@ class App
 
       puts "\n"
     end
+    save_data
+  end
+
+  private
+
+  def save_data
+    save_json(@books, BOOKS_FILE)
+    save_json(@people, PEOPLE_FILE)
+    save_json(@rentals, RENTALS_FILE)
+  end
+
+  def save_json(data, file_path)
+    dir_path = File.dirname(file_path)
+    FileUtils.mkdir_p(dir_path) unless Dir.exist?(dir_path)
+  
+    existing_data = []
+    if File.exist?(file_path)
+      existing_data = JSON.parse(File.read(file_path))
+    end
+  
+    updated_data = existing_data + data.map(&:to_h)
+  
+    File.write(file_path, JSON.generate(updated_data))
   end
 end
