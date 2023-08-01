@@ -19,6 +19,7 @@ class Teacher < Person
 
   def to_h
     {
+      type: self.class.name,
       id: @id,
       name: @name,
       age: @age,
