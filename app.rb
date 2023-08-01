@@ -9,9 +9,9 @@ require_relative 'classes/utility/io'
 require 'json'
 
 class App
-  BOOKS_FILE = './data/books.json'
-  PEOPLE_FILE = './data/people.json'
-  RENTALS_FILE = './data/rentals.json'
+  BOOKS_FILE = './data/books.json'.freeze
+  PEOPLE_FILE = './data/people.json'.freeze
+  RENTALS_FILE = './data/rentals.json'.freeze
 
   def initialize
     @books = []
@@ -55,15 +55,13 @@ class App
 
   def save_json(data, file_path)
     dir_path = File.dirname(file_path)
-    FileUtils.mkdir_p(dir_path) unless Dir.exist?(dir_path)
-  
+    FileUtils.mkdir_p(dir_path)
+
     existing_data = []
-    if File.exist?(file_path)
-      existing_data = JSON.parse(File.read(file_path))
-    end
-  
+    existing_data = JSON.parse(File.read(file_path)) if File.exist?(file_path)
+
     updated_data = existing_data + data.map(&:to_h)
-  
+
     File.write(file_path, JSON.generate(updated_data))
   end
 end

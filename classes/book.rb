@@ -14,7 +14,7 @@ class Book
   def to_h
     {
       title: @title,
-      author: @author,
+      author: @author
     }
   end
 end
