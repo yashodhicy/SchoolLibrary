@@ -1,7 +1,7 @@
 require './classes/person'
 
 class Student < Person
-  attr_reader :classroom, :id
+  attr_accessor :classroom, :id
 
   def initialize(age, classroom, **defaults)
     @id = rand(30..5000)

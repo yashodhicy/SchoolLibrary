@@ -6,6 +6,9 @@ require_relative 'classes/rental_creator'
 require_relative 'classes/rental_lister'
 require_relative 'classes/utility/menu'
 require_relative 'classes/utility/io'
+require_relative 'classes/read_data/load_book'
+require_relative 'classes/read_data/load_people'
+require_relative 'classes/read_data/load_rentals'
 require 'json'
 
 class App
@@ -14,15 +17,15 @@ class App
   RENTALS_FILE = './data/rentals.json'.freeze
 
   def initialize
-    @books = []
-    @people = []
-    @rentals = []
+    @books = read_books(BOOKS_FILE) || []
+    @people = read_people(PEOPLE_FILE) || []
+    @rentals = read_rentals(RENTALS_FILE) || []
     @book_lister = BookLister.new(@books)
     @person_lister = PersonLister.new(@people)
     @person_creator = PersonCreator.new(@people)
     @book_creator = BookCreator.new(@books)
     @rental_creator = RentalCreator.new(@books, @people, @rentals)
-    @rental_lister = RentalLister.new(@rentals, @people, @books)
+    @rental_lister = RentalLister.new(@rentals)
     @menu = Menu.new
     @io = IO.new(
       book_lister: BookLister.new(@books),
@@ -30,7 +33,7 @@ class App
       person_creator: PersonCreator.new(@people),
       book_creator: BookCreator.new(@books),
       rental_creator: RentalCreator.new(@books, @people, @rentals),
-      rental_lister: RentalLister.new(@rentals, @people, @books)
+      rental_lister: RentalLister.new(@rentals)
     )
   end
 
@@ -39,11 +42,11 @@ class App
       @menu.print
       choice = gets.chomp.downcase
       break unless @io.handle_choice(choice)
-
       puts "\n"
     end
     save_data
   end
+
 
   private
 
@@ -56,12 +59,11 @@ class App
   def save_json(data, file_path)
     dir_path = File.dirname(file_path)
     FileUtils.mkdir_p(dir_path)
+    # existing_data = []
+    # existing_data = JSON.parse(File.read(file_path)) if File.exist?(file_path)
 
-    existing_data = []
-    existing_data = JSON.parse(File.read(file_path)) if File.exist?(file_path)
-
-    updated_data = existing_data + data.map(&:to_h)
-
-    File.write(file_path, JSON.generate(updated_data))
+    # updated_data = existing_data + data.map(&:to_h)
+    File.write(file_path, JSON.generate(data.map(&:to_h)))
   end
+
 end
