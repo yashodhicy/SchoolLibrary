@@ -59,10 +59,6 @@ class App
   def save_json(data, file_path)
     dir_path = File.dirname(file_path)
     FileUtils.mkdir_p(dir_path)
-    # existing_data = []
-    # existing_data = JSON.parse(File.read(file_path)) if File.exist?(file_path)
-
-    # updated_data = existing_data + data.map(&:to_h)
     File.write(file_path, JSON.generate(data.map(&:to_h)))
   end
 end
