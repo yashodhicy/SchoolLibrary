@@ -2,7 +2,7 @@ require 'rspec'
 require_relative '../classes/person'
 require_relative '../classes/teacher'
 
-RSpec.describe Teacher do
+describe Teacher do
   describe '#initialize' do
     it 'creates a teacher with a specialization, age, and defaults' do
       teacher = Teacher.new('Math', 35)

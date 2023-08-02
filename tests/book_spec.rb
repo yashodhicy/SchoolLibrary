@@ -2,7 +2,7 @@ require 'rspec'
 require_relative '../classes/book'
 require_relative '../classes/student'
 
-RSpec.describe Book do
+describe Book do
   let(:book) { Book.new('Title', 'Author') }
   let(:person) { Student.new(23, 'class', name: 'yash') }
 

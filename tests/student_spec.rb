@@ -2,7 +2,7 @@ require 'rspec'
 require_relative '../classes/student'
 require_relative '../classes/classroom'
 
-RSpec.describe Student do
+describe Student do
   let(:classroom) { double('Classroom') }
 
   describe '#initialize' do

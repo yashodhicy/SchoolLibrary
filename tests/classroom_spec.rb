@@ -2,7 +2,7 @@ require 'rspec'
 require_relative '../classes/classroom'
 require_relative '../classes/student'
 
-RSpec.describe Classroom do
+describe Classroom do
   describe '#initialize' do
     it 'creates a classroom with a label' do
       classroom = Classroom.new('1A')
