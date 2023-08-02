@@ -36,4 +36,13 @@ RSpec.describe Person do
       expect(person.rentals).to include(Rental.new('2023-08-02', book, person))
     end
   end
+
+  describe '#to_h' do
+    it 'return hash withd details' do
+        person = Person.new(25,name: 'John', parent_permission: false)
+        p person
+        hash = {id: person.id,age: 25, name: 'John', parent_permission: false}
+        expect(person.to_h).to eq(hash)
+    end
+  end
 end
