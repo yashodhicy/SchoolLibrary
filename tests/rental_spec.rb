@@ -1,9 +1,8 @@
-require 'rspec'
 require_relative '../classes/rental'
 require_relative '../classes/book'
 require_relative '../classes/person'
 
-RSpec.describe Rental do
+describe Rental do
   describe '#initialize' do
     it 'creates a rental with a date, book, and person' do
       book = Book.new('Ruby Programming', 'Ruby Guy')

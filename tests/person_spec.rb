@@ -1,8 +1,7 @@
-require 'rspec'
 require_relative '../classes/person'
 require_relative '../classes/book'
 
-RSpec.describe Person do
+describe Person do
   describe '#can_use_services?' do
     context 'when the person is of age' do
       it 'returns true' do

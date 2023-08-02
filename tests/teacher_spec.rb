@@ -1,9 +1,8 @@
-require 'rspec'
 require_relative '../classes/person'
 require_relative '../classes/teacher'
 
-RSpec.describe Teacher do
-  describe '#initialize' do
+describe Teacher do
+  context '#initialize' do
     it 'creates a teacher with a specialization, age, and defaults' do
       teacher = Teacher.new('Math', 35)
       expect(teacher.specialization).to eq('Math')
@@ -20,14 +19,14 @@ RSpec.describe Teacher do
     end
   end
 
-  describe '#can_use_services?' do
+  context '#can_use_services?' do
     it 'returns true' do
       teacher = Teacher.new('Art', 40)
       expect(teacher.can_use_services?).to eq(true)
     end
   end
 
-  describe '#to_h' do
+  context '#to_h' do
     it 'returns a hash representation of the teacher' do
       teacher = Teacher.new('English', 45, name: 'Alice')
       teacherhash = {
