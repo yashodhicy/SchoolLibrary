@@ -62,4 +62,3 @@ class App
     File.write(file_path, JSON.generate(data.map(&:to_h)))
   end
 end
-
