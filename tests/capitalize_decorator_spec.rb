@@ -1,5 +1,5 @@
 require 'rspec'
-require_relative '../decorators/capitalize_decorator'  # Adjust the require path
+require_relative '../decorators/capitalize_decorator' # Adjust the require path
 
 RSpec.describe CapitalizeDecorator do
   let(:nameable) { double('Nameable') }
