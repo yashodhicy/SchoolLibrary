@@ -21,6 +21,15 @@ class Person < Nameable
     @age >= 18
   end
 
+  def to_h
+    {
+      id: @id,
+      name: @name,
+      age: @age,
+      parent_permission: @parent_permission
+    }
+  end
+
   private :of_age?
 
   def can_use_services?
