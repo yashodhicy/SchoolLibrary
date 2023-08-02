@@ -1,7 +1,6 @@
-# Assuming you have RSpec installed. If not, you can install it with: gem install rspec
 require 'rspec'
 require_relative '../classes/person'
-require_relative '../classes/book' # Make sure to adjust the require path to match your file structure
+require_relative '../classes/book'
 
 RSpec.describe Person do
   describe '#can_use_services?' do

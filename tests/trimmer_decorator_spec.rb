@@ -1,5 +1,5 @@
 require 'rspec'
-require_relative '../decorators/trimmer_decorator' # Adjust the require path
+require_relative '../decorators/trimmer_decorator'
 
 RSpec.describe TrimmerDecorator do
   let(:nameable) { double('Nameable', correct_name: 'Long Name Here') }

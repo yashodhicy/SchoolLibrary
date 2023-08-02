@@ -1,5 +1,4 @@
-require 'pry'
-require './classes/person'
+require_relative 'person'
 
 class Teacher < Person
   attr_accessor :specialization, :id

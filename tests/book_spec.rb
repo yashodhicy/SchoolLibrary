@@ -1,12 +1,9 @@
 require_relative '../classes/book'
 require_relative '../classes/student'
 
-# Adjust the path to the Book class
-
 RSpec.describe Book do
   let(:book) { Book.new('Title', 'Author') }
   let(:person) { Student.new(23, 'class', name: 'yash') }
-  # You can use a double to represent the Person object
 
   describe '#initialize' do
     it 'sets title and author attributes' do

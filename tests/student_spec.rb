@@ -1,6 +1,6 @@
 require 'rspec'
 require_relative '../classes/student'
-require_relative '../classes/classroom' # Make sure to adjust the require path to match your file structure
+require_relative '../classes/classroom'
 
 RSpec.describe Student do
   let(:classroom) { double('Classroom') }

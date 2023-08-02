@@ -30,13 +30,14 @@ RSpec.describe Teacher do
   describe '#to_h' do
     it 'returns a hash representation of the teacher' do
       teacher = Teacher.new('English', 45, name: 'Alice')
-      expect(teacher.to_h).to eq({
-                                   type: 'Teacher',
-                                   id: teacher.id,
-                                   name: 'Alice',
-                                   age: 45,
-                                   specialization: 'English'
-                                 })
+      teacherhash = {
+        type: 'Teacher',
+        id: teacher.id,
+        name: 'Alice',
+        age: 45,
+        specialization: 'English'
+      }
+      expect(teacher.to_h).to eq(teacherhash)
     end
   end
 end
