@@ -39,7 +39,6 @@ RSpec.describe Person do
   describe '#to_h' do
     it 'return hash withd details' do
       person = Person.new(25, name: 'John', parent_permission: false)
-      p person
       hash = { id: person.id, age: 25, name: 'John', parent_permission: false }
       expect(person.to_h).to eq(hash)
     end
