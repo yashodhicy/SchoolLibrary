@@ -1,11 +1,10 @@
-require 'pry'
-require './classes/person'
+require_relative 'person'
 
 class Teacher < Person
   attr_accessor :specialization, :id
 
   def initialize(specialization, age, **defaults)
-    @id = rand(30..5000)
+    @id = rand(1000..10_000)
     defaults[:name] ||= 'Unknown'
     defaults[:parent_permission] = true if defaults[:parent_permission].nil?
 
